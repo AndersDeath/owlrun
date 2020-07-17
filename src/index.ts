@@ -1,86 +1,87 @@
-import { chalk, figlet, inquirer, execa } from './imports';
+import { inquirer } from './imports';
+import { dictionary } from './utils';
+import { ICmdListConfig, ICmdCommandConfig } from './interfaces';
+import { Cmd } from './cmd';
 
 
-const introduce = () => {
-    console.log(
-        chalk.yellow(
-            figlet.textSync('Owlrun utility', {})
-        )
-    );
-    console.log(
-        chalk.yellow(
-            '--------------'
-        )
-    );
-    console.log(
-        chalk.red(
-            'Owlrun utility'
-        )
-    );
-    console.log(
-        chalk.red(
-            'It\'s for your pleasure.'
-        )
-    );
-    console.log(
-        chalk.yellow(
-            '--------------'
-        )
-    );
+class App {
+    public run() {
+        cmd.introduce();
+
+        cmd.list({
+            associative: 'init',
+            message: dictionary.mainQuestion,
+            commands: [
+                {
+                    cmd: 'install',
+                    func: installActionsFunc
+                },
+                {
+                    cmd: 'exit',
+                    func: cmd.bye
+                }
+            ]
+        });
+
+    }
 }
 
-const installActionsFunc = () => {
-    inquirer.prompt([{
-        type: 'list',
-        name: 'install',
-        message: 'What do you want to install? ',
-        choices: ['React-starter', 'Angular-starter', 'Webpack4-starter']
-    }]).then((e: any) => {
-        if (e.install === 'React-starter') {
-            inquirer
-                .prompt([{ type: "Input", name: 'projname', message: 'Please send me a name of project!' }])
-                .then((answers: any) => {
-                    doIt('git', ['clone', 'https://github.com/AndersDeath/owl-react-starter.git', answers.projname]);
-                });
-        }
-        if (e.install === 'Angular-starter') {
-            inquirer
-                .prompt([{ type: "Input", name: 'projname', message: 'Please send me a name of project!' }])
-                .then((answers: any) => {
-                    doIt('git', ['clone', 'https://github.com/AndersDeath/owl-ng-starter.git', answers.projname]);
-                });
-        }
-        if (e.install === 'Webpack4-starter') {
-            inquirer
-                .prompt([{ type: "Input", name: 'projname', message: 'Please send me a name of project!' }])
-                .then((answers: any) => {
-                    doIt('git', ['clone', 'https://github.com/AndersDeath/webpack4-pug-sass-images-fonts-sarter.git', answers.projname]);
-                });
-        }
+const cmd = new Cmd();
+const app = new App();
+
+
+const reactStarter = () => {
+    inquirer
+        .prompt([{ type: "Input", name: 'projname', message: 'Please send me a name of project!' }])
+        .then((answers: any) => {
+            cmd.exec('git', ['clone', 'https://github.com/AndersDeath/owl-react-starter.git', answers.projname]);
+        });
+}
+const angularStarter = () => {
+    inquirer
+        .prompt([{ type: "Input", name: 'projname', message: 'Please send me a name of project!' }])
+        .then((answers: any) => {
+            cmd.exec('git', ['clone', 'https://github.com/AndersDeath/owl-ng-starter.git', answers.projname]);
+        });
+}
+const webpackStarter = () => {
+    inquirer
+        .prompt([{ type: "Input", name: 'projname', message: 'Please send me a name of project!' }])
+    .then((answers: any) => {
+        cmd.exec('git', ['clone', 'https://github.com/AndersDeath/webpack4-pug-sass-images-fonts-sarter.git', answers.projname]);
     });
 }
+const exit = () => { cmd.bye(); }
 
-
-const doIt = (command: any, argumenti: any = []) => {
-    execa(command, argumenti, { stdio: 'inherit' })
+const gitConfigs: ICmdListConfig = {
+    associative: 'install',
+    message: 'What do you want to install? ',
+    commands: [
+        {
+            cmd: 'React-starter',
+            func: reactStarter
+        },
+        {
+            cmd: 'Angular-starter',
+            func: angularStarter
+        },
+        {
+            cmd: 'Webpack4-starter',
+            func: webpackStarter
+        },
+        {
+            cmd: 'exit',
+            func: exit
+        }
+    ]
 }
 
-introduce();
+const installActionsFunc = (): void => {
+    cmd.list(gitConfigs);
+}
 
-inquirer.prompt([{
-    type: 'list',
-    name: 'projects',
-    message: 'What do you want to do?:',
-    choices: ['install', 'exit']
-}]).then((e: any) => {
-    if (e.projects === 'install') {
-        installActionsFunc();
-    }
-    if (e.projects === 'exit') {
-        console.log(
-            chalk.red(
-                'Owlrun utility is closed'
-            )
-        );
-    }
-});
+
+
+
+
+app.run();

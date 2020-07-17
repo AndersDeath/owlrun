@@ -4,4 +4,4 @@ const figlet = require('figlet');
 const inquirer = require('inquirer');
 const execa = require('execa');
 
-export {chalk, figlet, inquirer, execa};
+export { chalk, figlet, inquirer, execa };
