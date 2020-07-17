@@ -50,7 +50,10 @@ ${chalk.yellow(
     }
 
     public exec(command: string, argumenti: string[] = []): void {
-    execa(command, argumenti, { stdio: 'inherit' })
+        execa(command, argumenti, { stdio: 'inherit' })
+    }
 
+    public gitClone(command: string[] = []) {
+        execa('git', ['clone', ...command], { stdio: 'inherit' })
     }
 }

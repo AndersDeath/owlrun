@@ -11,18 +11,26 @@ declare module "utils" {
         subTitle: string;
         mainQuestion: string;
         bye: string;
+        sendProjectName: string;
     };
     export const separator = "--------------";
 }
 declare module "interfaces" {
+    type voidFunc = () => void;
+    type answerFunc = (answer?: any) => void;
+    interface ICmdConfig {
+        associative: string;
+        message: string;
+    }
     export interface ICmdCommandConfig {
         cmd: string;
-        func: () => void;
+        func: voidFunc | answerFunc;
     }
-    export interface ICmdListConfig {
-        associative: string;
+    export interface ICmdListConfig extends ICmdConfig {
         commands: ICmdCommandConfig[];
-        message: string;
+    }
+    export interface ICmdInputConfig extends ICmdConfig {
+        command: ICmdCommandConfig;
     }
 }
 declare module "cmd" {
@@ -32,6 +40,7 @@ declare module "cmd" {
         list(config: ICmdListConfig): void;
         bye(): void;
         exec(command: string, argumenti?: string[]): void;
+        gitClone(command?: string[]): void;
     }
 }
 declare module "index" { }

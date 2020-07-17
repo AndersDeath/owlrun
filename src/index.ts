@@ -1,6 +1,6 @@
 import { inquirer } from './imports';
 import { dictionary } from './utils';
-import { ICmdListConfig, ICmdCommandConfig } from './interfaces';
+import { ICmdListConfig, ICmdCommandConfig, ICmdInputConfig } from './interfaces';
 import { Cmd } from './cmd';
 
 
@@ -29,13 +29,28 @@ class App {
 const cmd = new Cmd();
 const app = new App();
 
+const inline = (config:ICmdInputConfig) => {
+    inquirer
+        .prompt([{ type: "Input", name: config.associative, message: config.message }])
+        .then((answers: any) => {
+            config.command.func(answers[config.associative]);
+        });
+}
+
 
 const reactStarter = () => {
-    inquirer
-        .prompt([{ type: "Input", name: 'projname', message: 'Please send me a name of project!' }])
-        .then((answers: any) => {
-            cmd.exec('git', ['clone', 'https://github.com/AndersDeath/owl-react-starter.git', answers.projname]);
-        });
+    inline(
+        {
+        associative: 'projname',
+        message: dictionary.sendProjectName,
+        command: {
+            cmd: 'git-clone => https://github.com/AndersDeath/owl-react-starter.git %name%',
+            func: function(answer: any): void {
+                if(~this.cmd.indexOf('git-clone => ')) {
+                    cmd.gitClone(this.cmd.replace('git-clone => ', '').trim().replace('%name%', answer).split(' '));
+                }
+        }}
+    })
 }
 const angularStarter = () => {
     inquirer
