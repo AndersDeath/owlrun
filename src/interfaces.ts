@@ -8,7 +8,7 @@ interface ICmdConfig {
 
 export interface ICmdCommandConfig {
     cmd: string;
-    func: voidFunc | answerFunc
+    func?: voidFunc | answerFunc
 }
 
 export interface ICmdListConfig extends ICmdConfig {

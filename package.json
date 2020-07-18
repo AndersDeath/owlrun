@@ -1,9 +1,24 @@
 {
   "name": "owlrun",
-  "author": "andersdeath",
-  "version": "0.0.1",
-  "description": "",
+  "author": {
+    "name": "Vladimir Bolshakov",
+    "url": "https://github.com/AndersDeath/owlrun",
+    "email": "andersdeath@gmail.com"
+  },
+  "version": "0.0.2",
+  "description": "Simple cli for fast starters installing",
   "main": "index.js",
+  "keywords": [
+    "cli",
+    "starter",
+    "boilerplate",
+    "typescript",
+    "spa",
+    "react",
+    "angular",
+    "nodejs",
+    "javascript"
+  ],
   "scripts": {
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
@@ -13,9 +28,9 @@
     "cli:run": "npm run build && node ./dist/index.js"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "https://github.com/AndersDeath/owlrun"
   },
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "chalk": "^3.0.0",
