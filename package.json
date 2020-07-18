@@ -5,7 +5,7 @@
     "url": "https://github.com/AndersDeath/owlrun",
     "email": "andersdeath@gmail.com"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple cli for fast starters installing",
   "main": "index.js",
   "keywords": [
