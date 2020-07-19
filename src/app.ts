@@ -11,6 +11,10 @@ export class App {
      * Declare instance of cmd class
      */
     private cmd = new Cmd();
+
+    /**
+     * Config for starters installation
+     */
     private installConfig: ICmdListConfig = {
         associative: 'install',
         message: dictionary.whatDoYouWant,
@@ -59,10 +63,16 @@ export class App {
         ]
     }
 
+    /**
+     * Build and show install astarters actions list
+     */
     public installAction() {
         this.cmd.list(this.installConfig);
     }
 
+    /**
+     * Initial method
+     */
     public run() {
         this.cmd.introduce();
 
