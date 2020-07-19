@@ -2,7 +2,14 @@ import { dictionary } from './utils';
 import { ICmdListConfig } from './interfaces';
 import { Cmd } from './cmd';
 
+/**
+ * Main class
+ */
 export class App {
+
+    /**
+     * Declare instance of cmd class
+     */
     private cmd = new Cmd();
     private installConfig: ICmdListConfig = {
         associative: 'install',
