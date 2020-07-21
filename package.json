@@ -28,7 +28,9 @@
     "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline && node postbuild.js",
     "cli:run": "npm run build && node ./dist/index.js",
     "compodoc": "npx compodoc -p tsconfig.json",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "test:run": "jest",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -47,9 +49,12 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-typescript": "^7.8.3",
+    "@types/jest": "^26.0.5",
     "@types/node": "^13.7.4",
     "babel-loader": "^8.1.0",
-    "typescript": "^3.8.2"
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.3",
+    "typescript": "^3.9.7"
   },
   "bin": {
     "owlrun": "./dist/index.js"
