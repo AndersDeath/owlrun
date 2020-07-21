@@ -15,5 +15,9 @@ const inquirer = require('inquirer');
  * import execa
  */
 const execa = require('execa');
+/**
+ * import yargs
+ */
+const yargs = require('yargs');
 
-export { chalk, figlet, inquirer, execa };
+export { chalk, figlet, inquirer, execa, yargs };

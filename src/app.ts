@@ -1,6 +1,7 @@
 import { dictionary } from './utils';
 import { ICmdListConfig } from './interfaces';
 import { Cmd } from './cmd';
+import { yargs } from './imports';
 
 /**
  * Main class
@@ -75,21 +76,36 @@ export class App {
      */
     public run() {
         this.cmd.introduce();
-
-        this.cmd.list({
-            associative: 'init',
-            message: dictionary.mainQuestion,
-            commands: [
-                {
-                    cmd: 'install',
-                    func: this.installAction.bind(this)
-                },
-                {
-                    cmd: 'exit',
-                    func: this.cmd.bye
-                }
-            ]
-        });
+        if (yargs.argv.install === true) {
+            console.log('QWEQWEWE')
+        }
+        yargs
+            .command('install [projname]', 'clone the project', (yargs: any) => {
+                // yargs
+                //     .positional('projname', {
+                //         describe: 'port to bind on',
+                //         default: 5000
+                //     })
+            }, (argv: any) => {
+                this.installAction();
+            })
+            .command({command: '*', handler: () => {
+                this.cmd.list({
+                    associative: 'init',
+                    message: dictionary.mainQuestion,
+                    commands: [
+                        {
+                            cmd: 'install',
+                            func: this.installAction.bind(this)
+                        },
+                        {
+                            cmd: 'exit',
+                            func: this.cmd.bye
+                        }
+                    ]
+                });
+            }})
+            .argv
 
     }
 }
