@@ -1,12 +1,11 @@
 /**
  * Void function type
  */
-type voidFunc = () => void;
+declare type voidFunc = () => void;
 /**
  * Answer function type
  */
-type answerFunc =  (answer?: any) => void;
-
+declare type answerFunc = (answer?: any) => void;
 /**
  * Common list and input config interface
  */
@@ -20,7 +19,6 @@ interface ICmdConfig {
      */
     message: string;
 }
-
 /**
  * Command config interface
  */
@@ -32,9 +30,8 @@ export interface ICmdCommandConfig {
     /**
      * cmd command callback
      */
-    func?: voidFunc | answerFunc
+    func?: voidFunc | answerFunc;
 }
-
 /**
  * Cmd list config interface
  */
@@ -44,7 +41,6 @@ export interface ICmdListConfig extends ICmdConfig {
      */
     commands: ICmdCommandConfig[];
 }
-
 /**
  * Cmd input config interface
  */
@@ -54,3 +50,4 @@ export interface ICmdInputConfig extends ICmdConfig {
      */
     command: ICmdCommandConfig;
 }
+export {};

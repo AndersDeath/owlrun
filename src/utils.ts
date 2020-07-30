@@ -1,3 +1,6 @@
+/**
+ * strings distionary
+ */
 export const dictionary = {
     title: 'Owlrun utility',
     subTitle: 'It\'s for your pleasure.',
@@ -7,8 +10,14 @@ export const dictionary = {
     whatDoYouWant: 'What do you want to install?'
 };
 
+/**
+ * simple string separator
+ */
 export const separator = '--------------';
 
+/**
+ * Command patterns description
+ */
 export const COMMANDS = {
     GIT_CLONE: 'git-clone =>'
 }

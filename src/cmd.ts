@@ -2,7 +2,13 @@ import { chalk, figlet, inquirer, execa } from './imports';
 import { dictionary, separator, COMMANDS } from './utils';
 import { ICmdListConfig, ICmdCommandConfig, ICmdInputConfig } from './interfaces';
 
+/**
+ * Class with methods for working with terminal
+ */
 export class Cmd {
+    /**
+     * Display introduction
+     */
     public introduce(): void {
         console.log(`
 ${chalk.yellow(
@@ -23,6 +29,10 @@ ${chalk.yellow(
 `);
     }
 
+    /**
+     * Create and displace inquirer promt list
+     * @param config config for CmdList
+     */
     public list(config: ICmdListConfig): void {
         inquirer.prompt([{
             type: 'list',
@@ -41,6 +51,10 @@ ${chalk.yellow(
         });
     }
 
+    /**
+     * Create and displace inquirer promt input
+     * @param config config for CmdInput
+     */
     public inline(config: ICmdInputConfig) {
         inquirer
             .prompt([{ type: "Input", name: config.associative, message: config.message }])
@@ -60,6 +74,9 @@ ${chalk.yellow(
             });
     }
 
+    /**
+     * Display bye
+     */
     public bye(): void {
         console.log(
             chalk.red(
@@ -68,10 +85,19 @@ ${chalk.yellow(
         );
     }
 
+    /**
+     * A terminal commad execution
+     * @param command exec command
+     * @param argumenti exec arguments
+     */
     public exec(command: string, argumenti: string[] = []): void {
         execa(command, argumenti, { stdio: 'inherit' })
     }
 
+    /**
+     * Git clone execution
+     * @param command git clone params
+     */
     public gitClone(command: string[] = []) {
         execa('git', ['clone', ...command], { stdio: 'inherit' })
     }
