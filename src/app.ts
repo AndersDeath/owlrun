@@ -81,11 +81,7 @@ export class App {
         }
         yargs
             .command('install [projname]', 'clone the project', (yargs: any) => {
-                // yargs
-                //     .positional('projname', {
-                //         describe: 'port to bind on',
-                //         default: 5000
-                //     })
+
             }, (argv: any) => {
                 this.installAction();
             })

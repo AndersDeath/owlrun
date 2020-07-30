@@ -5,8 +5,3 @@ import { App } from './app';
  */
 const app = new App();
 app.run();
-
-// const homedir = require('os').homedir()
-
-// console.log(homedir)
-
