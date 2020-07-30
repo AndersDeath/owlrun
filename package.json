@@ -26,7 +26,6 @@
     "build:js": "npx babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline && node postbuild.js",
     "cli:run": "npm run build && node ./dist/index.js",
     "compodoc": "npx compodoc -p tsconfig.json",
-    "postinstall": "npm run build",
     "test:run": "npx jest",
     "test:coverage": "npx jest --coverage"
   },
