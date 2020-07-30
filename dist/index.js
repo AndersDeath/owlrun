@@ -1,5 +1,5 @@
 #!/usr/bin/env node
- /** Version: 0.0.3 */
+ /** Version: 0.0.4 */
 "use strict";
 
 var _app = require("./app");
